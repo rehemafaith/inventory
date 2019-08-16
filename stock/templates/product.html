@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Product</title>
+</head>
+<body>
+  {% extends 'base.html' %}
+  {% load static %}
+  
+  {% block content %}
+  <form action="/product/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" style="border-radius: 20px;" class="btn btn-primary btn-lg">
+
+    {%for prod in product%}
+    <h6>{{prod.name}}</h6>
+    <p>{{prod.category}}</p>
+    <p>{{prod.price}}</p>
+    <p>{{prod.brand}}</p>
+    {% endfor %}
+  {%endblock%}
+</body>
+</html>

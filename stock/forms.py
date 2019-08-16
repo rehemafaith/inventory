@@ -1,5 +1,6 @@
 from django import forms
 from .models import Brand,Category,Store,Products,Order
+from django.forms import modelform_factory
 
 class BrandForm(forms.ModelForm):
   '''
@@ -18,7 +19,7 @@ class CategoryForm(forms.ModelForm):
   New category creation form
   '''
 
-  name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Brand Name'}))
+  name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Category Name'}))
 
   class Meta:
     model = Category
@@ -29,9 +30,13 @@ class StoreForm(forms.ModelForm):
   New brand creation form
   '''
 
-  name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Brand Name'}))
+  name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Store Name'}))
 
   class Meta:
     model = Store
     fields = ['name']
 
+
+ProductForm = modelform_factory(Products, fields=("name", "price","quantity","brand","category"))
+
+OrderForm = modelform_factory(Order, fields=("name", "address","phone","product"))
