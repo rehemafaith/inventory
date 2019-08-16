@@ -1,6 +1,28 @@
 from django.db import models
 
 
+class Profile(models.Model):
+   '''
+   Holds user's profile data.
+   '''
+
+   name = models.CharField(max_length = 250)
+   profile_photo = models.ImageField(upload_to = "images/")
+   bio = models.TextField()
+   
+
+   def save_profile(self):
+    self.save()
+  
+   def delete(self):
+    Profile.objects.get(id = self.id).delete()
+  
+   def update(self,field,val):
+    Profile.objects.get(id=self.id).update(field=val)
+    
+
+   def __str__(self):
+      return self.name
 
 class Brand(models.Model):
   '''
@@ -21,6 +43,9 @@ class Brand(models.Model):
      bran.save() 
 
 
+  def __str__(self):
+    return self.name
+
 class Category(models.Model):
   '''
   Holds the name of the category
@@ -40,6 +65,9 @@ class Category(models.Model):
      cat.save() 
 
 
+  def __str__(self):
+    return self.name
+
 class Store(models.Model):
   '''
   Holds the name of the store
@@ -58,6 +86,10 @@ class Store(models.Model):
      sto.store = new_store
      sto.save() 
 
+
+  def __str__(self):
+    return self.name
+
 class Products(models.Model):
   '''
   Holds the product info.
@@ -66,7 +98,7 @@ class Products(models.Model):
   name = models.CharField(max_length = 250)
   price = models.PositiveIntegerField(default = 0)
   quantity = models.PositiveIntegerField(default = 0)
-  brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+  brand = models.ForeignKey('Brand', on_delete=models.CASCADE)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
   
 
