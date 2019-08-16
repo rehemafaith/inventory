@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'inventory.wsgi.application'
 
 
 if config('MODE')=="dev":
-DATABASES = {
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DB_NAME'),
