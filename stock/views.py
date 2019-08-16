@@ -73,3 +73,5 @@ def delete_product(request, id=None):
               }
     
     return render(request, 'delete_product.html', context)
+
+  

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Product</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
       #customers {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -33,45 +36,62 @@
 <body>
   {% extends 'base.html' %}
   {% load static %}
-<div class="container">
+
   {% block content %}
-  <form action="/product/" method="POST" enctype="multipart/form-data">
+  <div class="container">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Order</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
+        </div>
+        <div class="modal-body">
+         
+  <form action="/order/" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit" style="border-radius: 20px;" class="btn btn-primary btn-lg">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 
 
     <table id="customers">
     <tr>
-        <th> Customer's Name </th>
-        <th>Phone No.</th>
-        <th>Address</th>
-        <th>Product</th>
+        <th> Ref No. </th>
+        <th>Description</th>
         <th>Quantity</th>
-      
-        
-        
-        <th>Total price</th>
+        <th>Expected date of delivery</th>
       </tr>
       
       <tr>
         {% for order in order %}
-        <td>{{order.name}}</td>
-        <td>{{order.phone}}</td>
-        <td>{{order.address}}</td>
+        <td>{{order.ref_no}}</td>
+        <td>{{order.desc}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.date}}</td>
         {%endfor%}
-        {%for prod in product%}
-        <td>{{prod.name}}</td>
-        <td>{{prod.quantity}}</td>
         
-        <td>{{prod.price}}</td>
        
       </tr>
       
-      {% endfor %}
+      
     
-  </div>
+ 
   </table>
+</div>
   {%endblock%}
 </body>
 </html>
