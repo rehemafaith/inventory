@@ -1,7 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http  import HttpResponse
-from .models import Brand,Category,Store,Products,Order
-from .forms import BrandForm,StoreForm,CategoryForm,ProductForm,OrderForm
+from .models import Products,Order
+from .forms import ProductForm,OrderForm
+from django.contrib import messages
 
 
 def home(request):
@@ -9,67 +10,7 @@ def home(request):
 
     return render(request,'home.html')
 
-def brand(request):
-    brand = Brand.objects.all()
 
-    if request.method == 'POST':
-      form = BrandForm(request.POST,request.FILES)
-      if form.is_valid():
-        brand = form.save(commit=False)
-        form.save()
-        return redirect('brand')
-    else:
-      form = BrandForm()
-
-
-    context = {
-      'form':form,
-      'brand':brand,
-    }
-
-    return render(request,'brand.html',context)
-
-
-
-def categories(request):
-
-    category = Category.objects.all()
-
-    if request.method == 'POST':
-      form = CategoryForm(request.POST,request.FILES)
-      if form.is_valid():
-        category = form.save(commit=False)
-        form.save()
-        return redirect('categories')
-    else:
-      form = CategoryForm()
-
-    context ={
-      'form':form,
-      'category':category,
-    }
-    return render(request,'category.html',context)  
-
-
-
-def stores(request):
-
-    store = Store.objects.all()
-
-    if request.method == 'POST':
-      form = StoreForm(request.POST,request.FILES)
-      if form.is_valid():
-        store = form.save(commit=False)
-        form.save()
-        return redirect('stores')
-    else:
-      form = StoreForm()
-
-    context ={
-      'form':form,
-      'store':store,
-    }
-    return render(request,'store.html',context)
     
 def product(request):
 
@@ -111,4 +52,24 @@ def order(request):
     'order':order,
   }
 
+  
+
   return render(request,'order.html',context)
+
+
+def delete_product(request, id=None):
+
+    product= get_object_or_404(Products, id=id)
+
+    
+
+    if request.method == "POST": 
+        product.delete()
+        messages.success(request, "Post successfully deleted!")
+        return redirect("product")
+    
+    context= {'product': product,
+              
+              }
+    
+    return render(request, 'delete_product.html', context)

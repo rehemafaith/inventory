@@ -5,27 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Product</title>
+  <style>
+      #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #customers tr:hover {background-color: #ddd;}
+      
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgb(137, 151, 138);
+        color: white;
+      }
+      </style>
 </head>
 <body>
   {% extends 'base.html' %}
   {% load static %}
-  
+<div class="container">
   {% block content %}
   <form action="/product/" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Submit" style="border-radius: 20px;" class="btn btn-primary btn-lg">
 
-    {%for prod in product%}
-    <h6>{{prod.name}}</h6>
-    <p>{{prod.category}}</p>
-    <p>{{prod.price}}</p>
-    <p>{{prod.brand}}</p>
-    {% endfor %}
-    {% for order in order %}
-    <h5>{{order.name}}</h5>
-    <p>{{order.phone}}</p>
-    {% endfor %}
+
+    <table id="customers">
+    <tr>
+        <th> Customer's Name </th>
+        <th>Phone No.</th>
+        <th>Address</th>
+        <th>Product</th>
+        <th>Quantity</th>
+      
+        
+        
+        <th>Total price</th>
+      </tr>
+      
+      <tr>
+        {% for order in order %}
+        <td>{{order.name}}</td>
+        <td>{{order.phone}}</td>
+        <td>{{order.address}}</td>
+        {%endfor%}
+        {%for prod in product%}
+        <td>{{prod.name}}</td>
+        <td>{{prod.quantity}}</td>
+        
+        <td>{{prod.price}}</td>
+       
+      </tr>
+      
+      {% endfor %}
+    
+  </div>
+  </table>
   {%endblock%}
 </body>
 </html>
