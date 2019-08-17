@@ -74,4 +74,19 @@ def delete_product(request, id=None):
     
     return render(request, 'delete_product.html', context)
 
-  
+def dispatch_order(request, id=None):
+
+    order= get_object_or_404(Order, id=id)
+
+    
+
+    if request.method == "POST": 
+        order.delete()
+        messages.success(request, "Order successfully deleted!")
+        return redirect("order")
+    
+    context= {'order': order,
+              
+              }
+    
+    return render(request, 'order.html', context)

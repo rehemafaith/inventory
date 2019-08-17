@@ -74,14 +74,17 @@
         <th>Description</th>
         <th>Quantity</th>
         <th>Expected date of delivery</th>
+        <th>Dispach</th>
       </tr>
       
       <tr>
         {% for order in order %}
+        
         <td>{{order.ref_no}}</td>
         <td>{{order.desc}}</td>
         <td>{{order.quantity}}</td>
         <td>{{order.date}}</td>
+        <td><a href="/product/{{ prod.id }}/delete/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Dispach</button></a></td>
         {%endfor%}
         
        
