@@ -90,7 +90,7 @@
         <th>Unit of Measure</th>
         <th>Reoder Level</th>
         <th>Sold Out</th>
-        <th>Edit</th>
+       
       </tr>
       {%for prod in product%}
       <tr>
@@ -101,7 +101,7 @@
         <td>{{prod.unit_measure}}</td>
         <td>{{prod.reorder_level}}</td>
         <td><a href="{{ prod.id }}/delete/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Sold</button></a></td>
-        <td><a ><button></button></a></td>
+       
         
       </tr>
       {% endfor %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http  import HttpResponse
-from .models import Products,Order
+from .models import Products,Order 
 from .forms import ProductForm,OrderForm
 from django.contrib import messages
 from django.views.generic.edit import UpdateView
