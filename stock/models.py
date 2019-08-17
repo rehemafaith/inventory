@@ -54,7 +54,7 @@ class Products(models.Model):
      prod.save()
 
   def __str__(self):
-      return self.name
+      return self.ref_no
 
 class Order(models.Model):
 
