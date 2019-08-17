@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.auth',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stock.apps.StockConfig',
     'bootstrap4',
+    'notifications',
 ]
 
 MIDDLEWARE = [

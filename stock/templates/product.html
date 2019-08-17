@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.8/css/mdb.min.css" rel="stylesheet">
+
   <title>Product</title>
 
   <style>
@@ -83,6 +90,7 @@
         <th>Unit of Measure</th>
         <th>Reoder Level</th>
         <th>Sold Out</th>
+        <th>Edit</th>
       </tr>
       {%for prod in product%}
       <tr>
@@ -92,7 +100,8 @@
         <td>{{prod.quantity}}</td>
         <td>{{prod.unit_measure}}</td>
         <td>{{prod.reorder_level}}</td>
-        <td><a href="/product/{{ prod.id }}/delete/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Sold</button></a></td>
+        <td><a href="{{ prod.id }}/delete/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Sold</button></a></td>
+        <td><a ><button></button></a></td>
         
       </tr>
       {% endfor %}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Product</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+      #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #customers tr:hover {background-color: #ddd;}
+      
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgb(137, 151, 138);
+        color: white;
+      }
+      </style>
+</head>
+<body>
+  {% extends 'base.html' %}
+  {% load static %}
+
+  {% block content %}
+  <div class="container">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New Order</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
+        </div>
+        <div class="modal-body">
+         
+  <form action="/order/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" style="border-radius: 20px;" class="btn btn-primary btn-lg">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+    <table id="customers">
+    <tr>
+        <th> Ref No. </th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Expected date of delivery</th>
+        <th>Dispach</th>
+      </tr>
+      
+      <tr>
+        {% for order in order %}
+        
+        <td>{{order.ref_no}}</td>
+        <td>{{order.desc}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.date}}</td>
+        <td><a href="/product/{{ prod.id }}/delete/"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Dispach</button></a></td>
+        {%endfor%}
+        
+       
+      </tr>
+      
+      
+    
+ 
+  </table>
+</div>
+  {%endblock%}
+</body>
+</html>
