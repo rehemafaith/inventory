@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stock.apps.StockConfig',
     'bootstrap4',
-    'notifications',
+    
 ]
 
 MIDDLEWARE = [
